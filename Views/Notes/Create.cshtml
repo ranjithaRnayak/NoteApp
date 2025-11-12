@@ -1,0 +1,16 @@
+@model NotesApp.Models.Note
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Create Note";
+}
+
+<h2>Create Note</h2>
+
+<form asp-action="Create" method="post" class="card bg-white">
+    @Html.AntiForgeryToken()
+    @await Html.PartialAsync("_NoteForm", Model)
+    <div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-link">Cancel</a> 
+    </div>
+</form>

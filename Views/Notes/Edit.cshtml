@@ -1,0 +1,16 @@
+@model NotesApp.Models.Note
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{ ViewData["Title"] = "Edit Note"; }
+
+<h2>Edit Note</h2>
+
+<form asp-action="Edit" method="post" class="card bg-white">
+  @Html.AntiForgeryToken()
+  <input type="hidden" asp-for="Id" />
+  @await Html.PartialAsync("_NoteForm", Model)
+  <div>
+  <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+  <a asp-action="Index" class="btn btn-sm btn-outline-danger">Back</a></div>
+</form>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

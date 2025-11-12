@@ -1,0 +1,35 @@
+@model IEnumerable<NotesApp.Models.Note>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Notes";
+}
+
+<h2>Notes</h2>
+
+<a asp-action="Create">+ Create New Note</a>
+<hr />
+
+@if (!Model.Any())
+{
+    <p>No notes yet — create your first note.</p>
+}
+else
+{
+    <div style="border:1px solid #ccc; padding:10px; margin:8px 0;">
+    @foreach (var note in Model)
+    {
+        
+        <div class="col" style="padding: 10px;">
+        <div class="card bg-white">
+            <h4 class="titleCard">@note.Title</h4>
+            <p>@note.Content</p>
+            <small>Priority: @note.Priority | Created: @note.CreatedAtUtc.ToLocalTime()</small><br />
+            <div>
+            <a asp-action="Edit" asp-route-id="@note.Id" class="btn-sm btn-outline-primary">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@note.Id" class="btn-sm btn-outline-danger">Delete</a>
+            </div>
+        </div>
+        </div>
+    }
+    </div>
+}

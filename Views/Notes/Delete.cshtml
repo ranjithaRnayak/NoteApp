@@ -1,0 +1,18 @@
+@model NotesApp.Models.Note
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{ ViewData["Title"] = "Delete Note"; }
+
+<div class="card">
+  <h3 class="titleCard">Delete this note?</h3>
+  <p><strong>@Model.Title</strong></p>
+  <p class="meta">@Model.CreatedAtUtc.ToLocalTime()</p>
+  <form asp-action="Delete" method="post" class="card bg-white">
+    @Html.AntiForgeryToken()
+    @await Html.PartialAsync("_NoteCard", Model)
+    <input type="hidden" asp-for="Id" />
+    <div>
+    <button type="submit" class="btn btn-sm btn-outline-danger">Yes, delete</button>
+    <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Cancel</a> </div>
+  </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
